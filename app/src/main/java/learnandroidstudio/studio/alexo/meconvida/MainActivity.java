@@ -3,6 +3,8 @@ package learnandroidstudio.studio.alexo.meconvida;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,8 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +23,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,8 +32,27 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        this.startDefaultFragment();
     }
 
+    private void startDefaultFragment() {
+        Fragment fragment = null;
+        Class fragmentClass = AllInvitedFragment.class;
+
+        try {
+            fragment=(Fragment) fragmentClass.newInstance();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.frama_content, fragment).commit();
+
+    }
+
+    //fechar o navigation
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -52,6 +63,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    //criar menu direito do app
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -59,6 +71,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    //trata evento de click do menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -74,25 +87,36 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //aqui é os itens clicados no menu
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
+        //cada item irá para uma navegação diferente
+        Fragment fragment = null;
+        Class fragmentClass = null;
+
         int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_all) {
+            fragmentClass = AllInvitedFragment.class;
+        } else if (id == R.id.nav_presents) {
+            fragmentClass = PresentFragment.class;
+        } else if (id == R.id.nav_absent) {
+            fragmentClass = AbsentFragment.class;
         }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+        //assim só irá precisar inserir qual fragment você deseja instanciar
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        //primeiro informa qual é o container que irá inserir e depois o fragmento
+        fragmentManager.beginTransaction().replace(R.id.frama_content, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
