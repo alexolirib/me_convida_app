@@ -1,4 +1,4 @@
-package learnandroidstudio.studio.alexo.meconvida;
+package learnandroidstudio.studio.alexo.meconvida.view;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import learnandroidstudio.studio.alexo.meconvida.R;
 
-public class AllInvitedFragment extends Fragment {
+
+public class AbsentFragment extends Fragment {
 
 
     @Override
@@ -18,9 +20,8 @@ public class AllInvitedFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_all_invited, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_absent, container, false);
     }
 
 

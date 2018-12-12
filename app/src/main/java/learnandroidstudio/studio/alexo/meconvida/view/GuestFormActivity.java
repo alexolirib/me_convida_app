@@ -1,7 +1,9 @@
-package learnandroidstudio.studio.alexo.meconvida;
+package learnandroidstudio.studio.alexo.meconvida.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import learnandroidstudio.studio.alexo.meconvida.R;
 
 public class GuestFormActivity extends AppCompatActivity {
 
