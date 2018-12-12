@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:text="@string/nome" />
     <EditText
+        android:id="@+id/txt_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <RadioGroup
@@ -18,16 +19,19 @@
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:id="@+id/radio_nao_confirmado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/presentes"/>
 
         <RadioButton
+            android:id="@+id/radio_confirmado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/nao_confimado" />
 
         <RadioButton
+            android:id="@+id/radio_ausente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ausentes" />
@@ -35,6 +39,7 @@
     </RadioGroup>
 
     <Button
+        android:id="@+id/btn_salvar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/salvar"/>
