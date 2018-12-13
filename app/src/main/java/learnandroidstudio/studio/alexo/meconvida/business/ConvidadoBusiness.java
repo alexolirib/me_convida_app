@@ -1,7 +1,11 @@
 package learnandroidstudio.studio.alexo.meconvida.business;
 
 import android.content.Context;
+import android.util.Log;
 
+import java.util.List;
+
+import learnandroidstudio.studio.alexo.meconvida.constants.DataBaseConstants;
 import learnandroidstudio.studio.alexo.meconvida.entities.ConvidadoEntity;
 import learnandroidstudio.studio.alexo.meconvida.repository.ConvidadoRepository;
 
@@ -15,5 +19,10 @@ public class ConvidadoBusiness {
     
     public Boolean insert(ConvidadoEntity convidadoEntity){
         return this.mConvidadoRepository.insert(convidadoEntity);
+    }
+
+    public List<ConvidadoEntity> getConvidados() {
+
+        return this.mConvidadoRepository.getConvidadoByQuery("select * from " + DataBaseConstants.GUEST.TABLE_NAME);
     }
 }

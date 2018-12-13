@@ -19,13 +19,13 @@
         android:layout_height="wrap_content">
 
         <RadioButton
-            android:id="@+id/radio_nao_confirmado"
+            android:id="@+id/radio_confirmado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/presentes"/>
 
         <RadioButton
-            android:id="@+id/radio_confirmado"
+            android:id="@+id/radio_nao_confirmado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/nao_confimado" />

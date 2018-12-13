@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         this.mViewHolderMain.mFloatAddGuest = this.findViewById(R.id.float_add_guest);
 
 
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.setListeners();
 
         this.startDefaultFragment();
+
     }
 
     private void startDefaultFragment() {

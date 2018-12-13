@@ -15,4 +15,7 @@
     <string name="nome">Nome</string>
     <string name="nao_confimado">Não Confimado</string>
     <string name="salvar">SALVAR</string>
+    <string name="nome_obrigatorio">Nome é obrigatório</string>
+    <string name="salvo_com_sucesso">Salvo com sucesso</string>
+    <string name="erro_ao_salvar">Algo de errado aconteceu</string>
 </resources>

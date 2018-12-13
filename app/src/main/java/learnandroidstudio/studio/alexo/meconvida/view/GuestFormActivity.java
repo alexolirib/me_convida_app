@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import learnandroidstudio.studio.alexo.meconvida.R;
 import learnandroidstudio.studio.alexo.meconvida.business.ConvidadoBusiness;
@@ -49,19 +50,36 @@ public class GuestFormActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void handleSave() {
+        if(!this.validateSave()){
+            return;
+        }
+
         ConvidadoEntity convidadoEntity = new ConvidadoEntity();
         convidadoEntity.setName(this.mViewHolderForm.mTxtNome.getText().toString());
         if(mViewHolderForm.mRadioConfirmado.isChecked()){
             convidadoEntity.setCondirmed(ConvidadoConstants.CONFIRMARTION.CONFIRMADO);
-        }
-        if(mViewHolderForm.mRadioNaoConfirmado.isChecked()){
+        }else if(mViewHolderForm.mRadioNaoConfirmado.isChecked()){
             convidadoEntity.setCondirmed(ConvidadoConstants.CONFIRMARTION.NAO_CONFIRMADO);
         }else{
             convidadoEntity.setCondirmed(ConvidadoConstants.CONFIRMARTION.AUSENTE);
         }
 
-        this.mConvidadoBusiness.insert(convidadoEntity);
+        if(this.mConvidadoBusiness.insert(convidadoEntity)){
+            Toast.makeText(this,this.getString(R.string.salvo_com_sucesso), Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this, getString(R.string.erro_ao_salvar), Toast.LENGTH_SHORT).show();
+        }
 
+        finish();
+
+    }
+
+    private boolean validateSave() {
+        if(this.mViewHolderForm.mTxtNome.getText().toString().equals("")){
+            this.mViewHolderForm.mTxtNome.setError(getString(R.string.nome_obrigatorio));
+            return false;
+        }
+        return true;
     }
 
     private static class ViewHolderForm{
