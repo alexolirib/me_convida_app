@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -42,6 +43,24 @@ public class PresentFragment extends Fragment {
         //obter recyclerview
         this.mViewHolderPresentFrag.rv_present = view.findViewById(R.id.frag_rv_present_id);
 
+        //definirLayout
+        this.mViewHolderPresentFrag.rv_present.setLayoutManager(new LinearLayoutManager(context));
+
+
+        return view;
+    }
+
+    private static class ViewHolderPresentFrag{
+        RecyclerView rv_present;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadConvidados();
+    }
+
+    private void loadConvidados() {
         List<ConvidadoEntity> convidadoEntityList = mConvidadoBusiness.getConvidadoByPresence(ConvidadoConstants.CONFIRMARTION.CONFIRMADO);
 
         //definir adapter
@@ -58,20 +77,15 @@ public class PresentFragment extends Fragment {
 
             @Override
             public void onDeletedClick(int id) {
+                mConvidadoBusiness.remove(id);
+
+                Toast.makeText(getContext(),getString(R.string.removido_com_sucesso),Toast.LENGTH_SHORT).show();
+
+                loadConvidados();
 
             }
         });
         mViewHolderPresentFrag.rv_present.setAdapter(adapter);
-
-
-        //definirLayout
-        this.mViewHolderPresentFrag.rv_present.setLayoutManager(new LinearLayoutManager(context));
-
-
-        return view;
-    }
-
-    private static class ViewHolderPresentFrag{
-        RecyclerView rv_present;
+        adapter.notifyDataSetChanged();
     }
 }

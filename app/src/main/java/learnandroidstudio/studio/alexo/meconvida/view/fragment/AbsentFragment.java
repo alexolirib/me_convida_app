@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -40,7 +41,22 @@ public class AbsentFragment extends Fragment {
         mViewHolderAbsentFrag.mRvAbsent = view.findViewById(R.id.frag_rv_absent);
         mConvidadoBusiness = new ConvidadoBusiness(context);
 
+        mViewHolderAbsentFrag.mRvAbsent.setLayoutManager(new LinearLayoutManager(context));
 
+        return  view;
+    }
+
+    private static class ViewHolderAbsentFrag{
+        RecyclerView mRvAbsent;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadConvidados();
+    }
+
+    private void loadConvidados() {
         List<ConvidadoEntity> convidadoBusinessList = mConvidadoBusiness.getConvidadoByPresence(ConvidadoConstants.CONFIRMARTION.AUSENTE);
         ConvidadoListAdapter adapter = new ConvidadoListAdapter(convidadoBusinessList, new OnConvidadoListenerInteractionListener() {
             @Override
@@ -56,19 +72,16 @@ public class AbsentFragment extends Fragment {
 
             @Override
             public void onDeletedClick(int id) {
+                mConvidadoBusiness.remove(id);
 
+                Toast.makeText(getContext(),getString(R.string.removido_com_sucesso),Toast.LENGTH_SHORT).show();
+
+                loadConvidados();
             }
         });
 
         mViewHolderAbsentFrag.mRvAbsent.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
-        mViewHolderAbsentFrag.mRvAbsent.setLayoutManager(new LinearLayoutManager(context));
-
-        return  view;
     }
-
-    private static class ViewHolderAbsentFrag{
-        RecyclerView mRvAbsent;
-    }
-
 }

@@ -21,4 +21,5 @@
     <string name="remocao_convidado">Remoção de convidado</string>
     <string name="deseja_remover">Deseja remover o convidado?</string>
     <string name="total">Total</string>
+    <string name="removido_com_sucesso">Convidado removido com sucesso</string>
 </resources>

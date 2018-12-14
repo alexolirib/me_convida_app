@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -34,6 +35,50 @@ public class AllInvitedFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        
+        loadDashBoard();
+        this.loadConvidados();
+    }
+
+    private void loadConvidados() {
+
+
+        List<ConvidadoEntity> listConvidados = this.mConvidadoBusiness.getConvidados();
+        //Definir um adapter
+        //delegar a função para o meu recyclerView
+        ConvidadoListAdapter convidadoListAdapter = new ConvidadoListAdapter(listConvidados,
+                new OnConvidadoListenerInteractionListener() {
+                    @Override
+                    public void onListClick(int id) {
+                        // abrir activity de formulário
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(ConvidadoConstants.BundleConstants.CONVIDADO_ID,id);
+
+                        Intent intent = new Intent(getContext(), GuestFormActivity.class);
+                        intent.putExtras(bundle);
+
+                        startActivity(intent);
+
+                    }
+
+                    @Override
+                    public void onDeletedClick(int id) {
+                        mConvidadoBusiness.remove(id);
+
+                        Toast.makeText(getContext(),getString(R.string.removido_com_sucesso),Toast.LENGTH_SHORT).show();
+                        loadDashBoard();
+                        loadConvidados();
+                    }
+                });
+        this.mViewHolderFragAll.mRvAllInvited.setAdapter(convidadoListAdapter);
+        //notifico que foi alterado
+        convidadoListAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_invited, container, false);
         Context context = view.getContext();
@@ -47,32 +92,8 @@ public class AllInvitedFragment extends Fragment {
         mConvidadoBusiness = new ConvidadoBusiness(context);
 
 
-        List<ConvidadoEntity> listConvidados = this.mConvidadoBusiness.getConvidados();
 
 
-        //Definir um adapter
-        //delegar a função para o meu recyclerView
-        ConvidadoListAdapter convidadoListAdapter = new ConvidadoListAdapter(listConvidados,
-                new OnConvidadoListenerInteractionListener() {
-            @Override
-            public void onListClick(int id) {
-                // abrir activity de formulário
-                Bundle bundle = new Bundle();
-                bundle.putInt(ConvidadoConstants.BundleConstants.CONVIDADO_ID,id);
-
-                Intent intent = new Intent(getContext(), GuestFormActivity.class);
-                intent.putExtras(bundle);
-
-                startActivity(intent);
-
-            }
-
-            @Override
-            public void onDeletedClick(int id) {
-                mConvidadoBusiness.remove(id);
-            }
-        });
-        this.mViewHolderFragAll.mRvAllInvited.setAdapter(convidadoListAdapter);
 
         //Definit um layout
         this.mViewHolderFragAll.mRvAllInvited.setLayoutManager(new LinearLayoutManager(context));
