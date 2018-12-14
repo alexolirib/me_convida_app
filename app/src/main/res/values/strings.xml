@@ -18,4 +18,7 @@
     <string name="nome_obrigatorio">Nome é obrigatório</string>
     <string name="salvo_com_sucesso">Salvo com sucesso</string>
     <string name="erro_ao_salvar">Algo de errado aconteceu</string>
+    <string name="remocao_convidado">Remoção de convidado</string>
+    <string name="deseja_remover">Deseja remover o convidado?</string>
+    <string name="total">Total</string>
 </resources>

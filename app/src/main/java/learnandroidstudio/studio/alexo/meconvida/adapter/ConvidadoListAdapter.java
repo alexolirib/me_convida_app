@@ -30,7 +30,7 @@ public class ConvidadoListAdapter extends RecyclerView.Adapter<ConvidadoViewHold
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.row_guest_list, parent, false);
-        return new ConvidadoViewHolder(view);
+        return new ConvidadoViewHolder(view, context);
     }
 
     @Override

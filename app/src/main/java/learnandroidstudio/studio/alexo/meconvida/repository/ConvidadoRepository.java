@@ -9,7 +9,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import learnandroidstudio.studio.alexo.meconvida.constants.ConvidadoConstants;
 import learnandroidstudio.studio.alexo.meconvida.constants.DataBaseConstants;
+import learnandroidstudio.studio.alexo.meconvida.entities.ConvidadoCount;
 import learnandroidstudio.studio.alexo.meconvida.entities.ConvidadoEntity;
 
 public class ConvidadoRepository {
@@ -121,5 +123,80 @@ public class ConvidadoRepository {
         }catch (Exception e){
             return convidadoEntity;
         }
+    }
+
+    public boolean update(ConvidadoEntity convidadoEntity) {
+
+        try{
+            SQLiteDatabase db = mConvidadeDatabaseHelper.getWritableDatabase();
+
+            String table = DataBaseConstants.GUEST.TABLE_NAME;
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(DataBaseConstants.GUEST.COLUMNS.NAME, convidadoEntity.getName());
+            contentValues.put(DataBaseConstants.GUEST.COLUMNS.PRESENCE, convidadoEntity.getCondirmed());
+
+            String selection = DataBaseConstants.GUEST.COLUMNS.ID + "= ?";
+            String[] selectionArgs = {String.valueOf(convidadoEntity.getId())};
+
+            db.update(table,contentValues,selection, selectionArgs);
+
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public Boolean remove(int id) {
+
+        try{
+            SQLiteDatabase db = mConvidadeDatabaseHelper.getWritableDatabase();
+
+            String table = DataBaseConstants.GUEST.TABLE_NAME;
+
+            String whereClase = DataBaseConstants.GUEST.COLUMNS.ID + "= ?";
+
+            String[] whereArgs = {String.valueOf(id)};
+
+            db.delete(table, whereClase, whereArgs);
+
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public ConvidadoCount loadDashBorad() {
+         ConvidadoCount convidadoCount = new ConvidadoCount();
+         Cursor cursor;
+
+         try{
+             SQLiteDatabase db = this.mConvidadeDatabaseHelper.getReadableDatabase();
+
+             String queryPresence = "select count(*) from " + DataBaseConstants.GUEST.TABLE_NAME+ " where "
+                     +DataBaseConstants.GUEST.COLUMNS.PRESENCE + " = " + ConvidadoConstants.CONFIRMARTION.CONFIRMADO;
+             cursor= db.rawQuery(queryPresence, null);
+             if(cursor != null && cursor.getCount() > 0){
+                 cursor.moveToFirst();
+                 convidadoCount.setPresentCount(cursor.getInt(0));
+             }
+
+             String queryAusente = "select count(*) from " + DataBaseConstants.GUEST.TABLE_NAME+ " where "
+                     +DataBaseConstants.GUEST.COLUMNS.PRESENCE + " = " + ConvidadoConstants.CONFIRMARTION.AUSENTE;
+             cursor= db.rawQuery(queryAusente, null);
+             if(cursor != null && cursor.getCount() > 0){
+                 cursor.moveToFirst();
+                 convidadoCount.setAbsentCount(cursor.getInt(0));
+             }
+
+             String queryAll = "select count(*) from " + DataBaseConstants.GUEST.TABLE_NAME;
+             cursor= db.rawQuery(queryAll, null);
+             if(cursor != null && cursor.getCount() > 0){
+                 cursor.moveToFirst();
+                 convidadoCount.setAllCont(cursor.getInt(0));
+             }
+             return convidadoCount;
+         }catch (Exception e){
+             return convidadoCount;
+         }
     }
 }

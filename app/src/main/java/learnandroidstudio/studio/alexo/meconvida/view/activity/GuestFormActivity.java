@@ -17,7 +17,7 @@ public class GuestFormActivity extends AppCompatActivity implements View.OnClick
 
     private ViewHolderForm mViewHolderForm = new ViewHolderForm();
     private ConvidadoBusiness mConvidadoBusiness;
-    private  int mConvidadoId;
+    private  int mConvidadoId = 0;
 
 
     @Override
@@ -85,14 +85,33 @@ public class GuestFormActivity extends AppCompatActivity implements View.OnClick
             convidadoEntity.setCondirmed(ConvidadoConstants.CONFIRMARTION.AUSENTE);
         }
 
+        if(mConvidadoId == 0){
+            inserirConvidado(convidadoEntity);
+        } else{
+            convidadoEntity.setId(mConvidadoId);
+            atualizarConvidade(convidadoEntity);
+        }
+
+
+        finish();
+
+    }
+
+    private void atualizarConvidade(ConvidadoEntity convidadoEntity) {
+        if(this.mConvidadoBusiness.update(convidadoEntity)){
+            Toast.makeText(this,this.getString(R.string.salvo_com_sucesso), Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this, getString(R.string.erro_ao_salvar), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void inserirConvidado(ConvidadoEntity convidadoEntity) {
+
         if(this.mConvidadoBusiness.insert(convidadoEntity)){
             Toast.makeText(this,this.getString(R.string.salvo_com_sucesso), Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(this, getString(R.string.erro_ao_salvar), Toast.LENGTH_SHORT).show();
         }
-
-        finish();
-
     }
 
     private boolean validateSave() {
