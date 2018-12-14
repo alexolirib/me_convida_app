@@ -20,7 +20,6 @@ public class ConvidadoViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindData(final ConvidadoEntity convidadoEntity, final OnConvidadoListenerInteractionListener listener) {
-        Log.e("nome", convidadoEntity.getName());
         this.mTextName.setText(convidadoEntity.getName());
 
         this.mTextName.setOnClickListener(new View.OnClickListener() {

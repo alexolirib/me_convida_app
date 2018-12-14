@@ -1,11 +1,10 @@
-package learnandroidstudio.studio.alexo.meconvida.view;
+package learnandroidstudio.studio.alexo.meconvida.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import learnandroidstudio.studio.alexo.meconvida.R;
+import learnandroidstudio.studio.alexo.meconvida.view.fragment.AbsentFragment;
+import learnandroidstudio.studio.alexo.meconvida.view.fragment.AllInvitedFragment;
+import learnandroidstudio.studio.alexo.meconvida.view.fragment.PresentFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 

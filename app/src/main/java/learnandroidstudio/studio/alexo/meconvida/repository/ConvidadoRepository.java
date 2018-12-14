@@ -53,8 +53,6 @@ public class ConvidadoRepository {
     }
 
     public List<ConvidadoEntity> getConvidadoByQuery(String query) {
-
-        Log.e("teste", "teste12");
         List<ConvidadoEntity> list = new ArrayList<>();
 
         try {
@@ -70,7 +68,6 @@ public class ConvidadoRepository {
                         convidadoEntity.setCondirmed(cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)));
 
 
-                        Log.e("nome", convidadoEntity.getName());
 
                         list.add(convidadoEntity);
                     }
@@ -86,5 +83,43 @@ public class ConvidadoRepository {
 
 
         return list;
+    }
+
+    public ConvidadoEntity load(int id) {
+        ConvidadoEntity convidadoEntity = new ConvidadoEntity();
+
+        try{
+            SQLiteDatabase sq = mConvidadeDatabaseHelper.getReadableDatabase();
+
+            //quais são as colunas que espero na minha query
+            String table = DataBaseConstants.GUEST.TABLE_NAME;
+
+            String[] projection = {
+                    DataBaseConstants.GUEST.COLUMNS.ID,
+                    DataBaseConstants.GUEST.COLUMNS.NAME,
+                    DataBaseConstants.GUEST.COLUMNS.PRESENCE
+            };
+
+            String selection = DataBaseConstants.GUEST.COLUMNS.ID + "= ?";
+            String[] selectionArgs = {String.valueOf(id)};
+
+            //select * form where id = {id}
+            Cursor cursor = sq.query(table, projection,selection,selectionArgs,null,null,null);
+            if(cursor !=null && cursor.getCount() > 0){
+                cursor.moveToFirst();
+                convidadoEntity.setId(cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.ID)));
+                convidadoEntity.setName(cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME)));
+                convidadoEntity.setCondirmed(cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)));
+
+            }
+
+            if(cursor != null){
+                cursor.close();
+            }
+
+            return convidadoEntity;
+        }catch (Exception e){
+            return convidadoEntity;
+        }
     }
 }

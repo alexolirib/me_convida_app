@@ -25,4 +25,14 @@ public class ConvidadoBusiness {
 
         return this.mConvidadoRepository.getConvidadoByQuery("select * from " + DataBaseConstants.GUEST.TABLE_NAME);
     }
+
+    public ConvidadoEntity load(int id) {
+
+        return mConvidadoRepository.load(id);
+    }
+
+    public List<ConvidadoEntity> getConvidadoByPresence(int presence) {
+        return mConvidadoRepository.getConvidadoByQuery("select * from "+ DataBaseConstants.GUEST.TABLE_NAME + "" +
+                " where " + DataBaseConstants.GUEST.COLUMNS.PRESENCE+ " = "+ presence);
+    }
 }

@@ -1,4 +1,4 @@
-package learnandroidstudio.studio.alexo.meconvida.view;
+package learnandroidstudio.studio.alexo.meconvida.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ public class GuestFormActivity extends AppCompatActivity implements View.OnClick
 
     private ViewHolderForm mViewHolderForm = new ViewHolderForm();
     private ConvidadoBusiness mConvidadoBusiness;
+    private  int mConvidadoId;
 
 
     @Override
@@ -34,6 +35,26 @@ public class GuestFormActivity extends AppCompatActivity implements View.OnClick
 
         this.setListener();
 
+        //se existe algum bundle passado
+        loadDataFromActivity();
+
+    }
+
+    private void loadDataFromActivity() {
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            mConvidadoId = bundle.getInt(ConvidadoConstants.BundleConstants.CONVIDADO_ID);
+
+            ConvidadoEntity convidadoEntity = mConvidadoBusiness.load(mConvidadoId);
+            this.mViewHolderForm.mTxtNome.setText(convidadoEntity.getName());
+            if(convidadoEntity.getCondirmed() == ConvidadoConstants.CONFIRMARTION.CONFIRMADO){
+                this.mViewHolderForm.mRadioConfirmado.setChecked(true);
+            }else if(convidadoEntity.getCondirmed() == ConvidadoConstants.CONFIRMARTION.NAO_CONFIRMADO){
+                this.mViewHolderForm.mRadioNaoConfirmado.setChecked(true);
+            }else{
+                this.mViewHolderForm.mRadioAusente.setChecked(true);
+            }
+        }
     }
 
     @Override
