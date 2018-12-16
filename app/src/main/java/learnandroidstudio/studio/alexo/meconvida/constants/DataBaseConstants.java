@@ -11,6 +11,7 @@ public class DataBaseConstants {
             public static final String ID = "c_id";
             public static final String NAME = "c_name";
             public static final String PRESENCE = "c_Guest";
+            public static final String DOCUMENT = "c_Document";
         }
     }
 }

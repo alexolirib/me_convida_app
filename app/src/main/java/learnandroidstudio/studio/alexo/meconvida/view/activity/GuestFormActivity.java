@@ -30,6 +30,7 @@ public class GuestFormActivity extends AppCompatActivity implements View.OnClick
         this.mViewHolderForm.mRadioConfirmado = findViewById(R.id.radio_confirmado);
         this.mViewHolderForm.mRadioAusente = findViewById(R.id.radio_ausente);
         this.mViewHolderForm.mBtnSalvar = findViewById(R.id.btn_salvar);
+        this.mViewHolderForm.mTxtDocument = findViewById(R.id.txt_documento);
 
         mConvidadoBusiness = new ConvidadoBusiness(this);
 
@@ -47,6 +48,7 @@ public class GuestFormActivity extends AppCompatActivity implements View.OnClick
 
             ConvidadoEntity convidadoEntity = mConvidadoBusiness.load(mConvidadoId);
             this.mViewHolderForm.mTxtNome.setText(convidadoEntity.getName());
+            this.mViewHolderForm.mTxtDocument.setText(convidadoEntity.getDocument());
             if(convidadoEntity.getCondirmed() == ConvidadoConstants.CONFIRMARTION.CONFIRMADO){
                 this.mViewHolderForm.mRadioConfirmado.setChecked(true);
             }else if(convidadoEntity.getCondirmed() == ConvidadoConstants.CONFIRMARTION.NAO_CONFIRMADO){
@@ -77,6 +79,7 @@ public class GuestFormActivity extends AppCompatActivity implements View.OnClick
 
         ConvidadoEntity convidadoEntity = new ConvidadoEntity();
         convidadoEntity.setName(this.mViewHolderForm.mTxtNome.getText().toString());
+        convidadoEntity.setDocument(this.mViewHolderForm.mTxtDocument.getText().toString());
         if(mViewHolderForm.mRadioConfirmado.isChecked()){
             convidadoEntity.setCondirmed(ConvidadoConstants.CONFIRMARTION.CONFIRMADO);
         }else if(mViewHolderForm.mRadioNaoConfirmado.isChecked()){
@@ -124,6 +127,7 @@ public class GuestFormActivity extends AppCompatActivity implements View.OnClick
 
     private static class ViewHolderForm{
         EditText mTxtNome;
+        EditText mTxtDocument;
         RadioButton mRadioNaoConfirmado;
         RadioButton mRadioConfirmado;
         RadioButton mRadioAusente;

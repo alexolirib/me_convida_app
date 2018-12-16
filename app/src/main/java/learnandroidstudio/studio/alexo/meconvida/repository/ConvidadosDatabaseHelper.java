@@ -16,6 +16,7 @@ public class ConvidadosDatabaseHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_TABLE_GUEST  = "CREATE TABLE "+ DataBaseConstants.GUEST.TABLE_NAME + "(" +
             " " + DataBaseConstants.GUEST.COLUMNS.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             " " + DataBaseConstants.GUEST.COLUMNS.NAME + " TEXT, " +
+            " " + DataBaseConstants.GUEST.COLUMNS.DOCUMENT + " TEXT , " +
             " " + DataBaseConstants.GUEST.COLUMNS.PRESENCE + " INTEGER);";
 
     private static final String DROP_TABLE_GUEST = "DROP TABLE IF EXISTS " + DataBaseConstants.GUEST.TABLE_NAME;

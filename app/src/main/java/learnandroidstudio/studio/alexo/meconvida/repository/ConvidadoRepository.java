@@ -43,6 +43,7 @@ public class ConvidadoRepository {
 
             ContentValues contentValues = new ContentValues();
             contentValues.put(DataBaseConstants.GUEST.COLUMNS.NAME, convidadoEntity.getName());
+            contentValues.put(DataBaseConstants.GUEST.COLUMNS.DOCUMENT, convidadoEntity.getDocument());
             contentValues.put(DataBaseConstants.GUEST.COLUMNS.PRESENCE, convidadoEntity.getCondirmed());
 
             sq.insert(DataBaseConstants.GUEST.TABLE_NAME, null, contentValues);
@@ -99,6 +100,7 @@ public class ConvidadoRepository {
             String[] projection = {
                     DataBaseConstants.GUEST.COLUMNS.ID,
                     DataBaseConstants.GUEST.COLUMNS.NAME,
+                    DataBaseConstants.GUEST.COLUMNS.DOCUMENT,
                     DataBaseConstants.GUEST.COLUMNS.PRESENCE
             };
 
@@ -111,6 +113,7 @@ public class ConvidadoRepository {
                 cursor.moveToFirst();
                 convidadoEntity.setId(cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.ID)));
                 convidadoEntity.setName(cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME)));
+                convidadoEntity.setDocument(cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.DOCUMENT)));
                 convidadoEntity.setCondirmed(cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)));
 
             }
@@ -133,6 +136,7 @@ public class ConvidadoRepository {
             String table = DataBaseConstants.GUEST.TABLE_NAME;
             ContentValues contentValues = new ContentValues();
             contentValues.put(DataBaseConstants.GUEST.COLUMNS.NAME, convidadoEntity.getName());
+            contentValues.put(DataBaseConstants.GUEST.COLUMNS.DOCUMENT, convidadoEntity.getDocument());
             contentValues.put(DataBaseConstants.GUEST.COLUMNS.PRESENCE, convidadoEntity.getCondirmed());
 
             String selection = DataBaseConstants.GUEST.COLUMNS.ID + "= ?";
