@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "778855521977",
+    "firebase_url": "https://me-convida.firebaseio.com",
+    "project_id": "me-convida",
+    "storage_bucket": "me-convida.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778855521977:android:669e85dddfbd5c27",
+        "android_client_info": {
+          "package_name": "learnandroidstudio.studio.alexo.meconvida"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "778855521977-4eseun4c956trtamhhginbu8hpj2h1n0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVPJECopnpJMljAN2TN-MZvAsQOM1Hhsk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

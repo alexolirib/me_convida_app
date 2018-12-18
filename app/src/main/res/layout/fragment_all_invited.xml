@@ -9,7 +9,8 @@
         android:id="@+id/linear_dashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -17,16 +18,25 @@
             <TextView
                 android:text="@string/presentes"
                 android:layout_width="0dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorTextPresent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <TextView
                 android:text="@string/ausentes"
                 android:layout_width="0dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorTextAusent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <TextView
                 android:text="@string/total"
                 android:layout_width="0dp"
+                android:gravity="center"
+                android:textColor="@color/colorTextTotal"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
         </LinearLayout>
@@ -38,26 +48,48 @@
                 android:id="@+id/frag_txt_present_all"
                 android:text="@string/presentes"
                 android:layout_width="0dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:textColor="@color/colorTextPresent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/frag_txt_ausentes_all"
                 android:text="@string/ausentes"
                 android:layout_width="0dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:textColor="@color/colorTextAusent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/frag_txt_total_all"
                 android:text="@string/total"
                 android:layout_width="0dp"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorTextTotal"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
 
+
+    <View
+        android:id="@+id/view_break"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linear_dashboard"
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimary"
+        />
     <android.support.v7.widget.RecyclerView
+
         android:id="@+id/frag_rv_all_invited"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/linear_dashboard"/>
+        android:layout_below="@+id/view_break"/>
 </RelativeLayout>

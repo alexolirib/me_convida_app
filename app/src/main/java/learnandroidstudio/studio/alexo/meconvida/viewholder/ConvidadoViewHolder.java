@@ -43,7 +43,7 @@ public class ConvidadoViewHolder extends RecyclerView.ViewHolder {
                 new AlertDialog.Builder(mContext)
                         .setTitle(R.string.remocao_convidado)
                         .setMessage("Deseja remover "+convidadoEntity.getName() +"?")
-                        .setIcon(R.drawable.ic_menu_camera)
+                        .setIcon(R.drawable.remove)
                         .setPositiveButton("SIM", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

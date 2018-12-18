@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,8 @@ public class ConvidadoRepository {
 
             return true;
         } catch (Exception e) {
+            //reporta o erro para ser analizado
+            FirebaseCrash.report(e);
             return false;
         }
 

@@ -4,25 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="@dimen/activity_general_padding"
     tools:context=".view.activity.GuestFormActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/textLabel"
         android:text="@string/nome" />
     <EditText
         android:id="@+id/txt_nome"
         android:layout_width="match_parent"
+        android:inputType="textPersonName"
+        style="@style/textEdit"
         android:layout_height="wrap_content" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/textLabel"
         android:text="@string/documento" />
     <EditText
         android:id="@+id/txt_documento"
+        style="@style/textEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        style="@style/textLabel"
+        android:text="@string/confirmacao"/>
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -31,12 +43,16 @@
             android:id="@+id/radio_confirmado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorTextPresent"
+            android:textStyle="bold"
             android:text="@string/presentes"/>
 
         <RadioButton
             android:id="@+id/radio_nao_confirmado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorTextAusent"
+            android:textStyle="bold"
             android:text="@string/nao_confimado" />
 
         <RadioButton
@@ -51,6 +67,11 @@
         android:id="@+id/btn_salvar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:padding="20dp"
+        android:background="@drawable/round_btn_linear_green"
+        android:textStyle="bold"
+        android:textColor="@color/colorTexrButton"
         android:text="@string/salvar"/>
 
 </LinearLayout>
